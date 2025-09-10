@@ -34,6 +34,16 @@ func main() {
 		authors.DELETE("/:id", handlers.DeleteAuthor) // DELETE /authors/:id
 	}
 
+	// Rotas para Empréstimos
+	loans := r.Group("/loans")
+	{
+		loans.GET("", handlers.GetLoans)              // GET /loans
+		loans.POST("", handlers.CreateLoan)           // POST /loans
+		loans.GET("/:id", handlers.GetLoan)           // GET /loans/:id
+		loans.PUT("/:id/return", handlers.ReturnLoan) // PUT /loans/:id/return
+		loans.DELETE("/:id", handlers.DeleteLoan)     // DELETE /loans/:id
+	}
+
 	// Sobe servidor na porta 8080
 	r.Run(":8080")
 }

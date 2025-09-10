@@ -1,0 +1,184 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2025-09-09T00:00:00.000Z",
+  "__export_source": "library-api",
+  "resources": [
+    {
+      "_id": "wrk_library_api",
+      "parentId": null,
+      "modified": 0,
+      "created": 0,
+      "name": "Library API",
+      "description": "Coleção para testar a Library API em Go",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "fld_books",
+      "parentId": "wrk_library_api",
+      "modified": 0,
+      "created": 0,
+      "name": "Books",
+      "description": "",
+      "environment": {},
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_get_books",
+      "parentId": "fld_books",
+      "modified": 0,
+      "created": 0,
+      "url": "http://localhost:8080/books",
+      "name": "Get All Books",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_book",
+      "parentId": "fld_books",
+      "modified": 0,
+      "created": 0,
+      "url": "http://localhost:8080/books",
+      "name": "Create Book",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Book Example\",\n  \"isbn\": \"123-456\",\n  \"author_ids\": [1]\n}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_book",
+      "parentId": "fld_books",
+      "url": "http://localhost:8080/books/1",
+      "name": "Get Book by ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_update_book",
+      "parentId": "fld_books",
+      "url": "http://localhost:8080/books/1",
+      "name": "Update Book",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"title\": \"Updated Book\",\n  \"isbn\": \"789-101\",\n  \"author_ids\": [1]\n}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_book",
+      "parentId": "fld_books",
+      "url": "http://localhost:8080/books/1",
+      "name": "Delete Book",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_authors",
+      "parentId": "wrk_library_api",
+      "name": "Authors",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_get_authors",
+      "parentId": "fld_authors",
+      "url": "http://localhost:8080/authors",
+      "name": "Get All Authors",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_author",
+      "parentId": "fld_authors",
+      "url": "http://localhost:8080/authors",
+      "name": "Create Author",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Author Example\",\n  \"bio\": \"Some biography\"\n}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_author",
+      "parentId": "fld_authors",
+      "url": "http://localhost:8080/authors/1",
+      "name": "Get Author by ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_update_author",
+      "parentId": "fld_authors",
+      "url": "http://localhost:8080/authors/1",
+      "name": "Update Author",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"name\": \"Updated Author\",\n  \"bio\": \"Updated biography\"\n}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_author",
+      "parentId": "fld_authors",
+      "url": "http://localhost:8080/authors/1",
+      "name": "Delete Author",
+      "method": "DELETE",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_loans",
+      "parentId": "wrk_library_api",
+      "name": "Loans",
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_get_loans",
+      "parentId": "fld_loans",
+      "url": "http://localhost:8080/loans",
+      "name": "Get All Loans",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_loan",
+      "parentId": "fld_loans",
+      "url": "http://localhost:8080/loans",
+      "name": "Create Loan",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"book_id\": 1,\n  \"user_name\": \"John Doe\"\n}"
+      },
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_loan",
+      "parentId": "fld_loans",
+      "url": "http://localhost:8080/loans/1",
+      "name": "Get Loan by ID",
+      "method": "GET",
+      "_type": "request"
+    },
+    {
+      "_id": "req_return_loan",
+      "parentId": "fld_loans",
+      "url": "http://localhost:8080/loans/1/return",
+      "name": "Return Loan",
+      "method": "PUT",
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_loan",
+      "parentId": "fld_loans",
+      "url": "http://localhost:8080/loans/1",
+      "name": "Delete Loan",
+      "method": "DELETE",
+      "_type": "request"
+    }
+  ]
+}
