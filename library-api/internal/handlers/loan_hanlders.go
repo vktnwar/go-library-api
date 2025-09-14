@@ -10,14 +10,27 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GET /loans
+// GetLoans godoc
+// @Summary Lista todos os empréstimos
+// @Tags loans
+// @Produce json
+// @Success 200 {array} models.Loan
+// @Router /loans [get]
 func GetLoans(c *gin.Context) {
 	var loans []models.Loan
 	database.DB.Preload("Book.Authors").Find(&loans) // já traz o livro e autores
 	c.JSON(http.StatusOK, loans)
 }
 
-// POST /loans
+// CreateLoan godoc
+// @Summary Cria um novo empréstimo
+// @Tags loans
+// @Accept json
+// @Produce json
+// @Param loan body models.Loan true "Dados do empréstimo"
+// @Success 201 {object} models.Loan
+// @Failure 400 {object} map[string]string
+// @Router /loans [post]
 func CreateLoan(c *gin.Context) {
 	var loan models.Loan
 
@@ -49,7 +62,14 @@ func CreateLoan(c *gin.Context) {
 	c.JSON(http.StatusCreated, loan)
 }
 
-// GET /loans/:id
+// GetLoan godoc
+// @Summary Busca um empréstimo pelo ID
+// @Tags loans
+// @Produce json
+// @Param id path int true "Loan ID"
+// @Success 200 {object} models.Loan
+// @Failure 404 {object} map[string]string
+// @Router /loans/{id} [get]
 func GetLoan(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var loan models.Loan
@@ -62,7 +82,15 @@ func GetLoan(c *gin.Context) {
 	c.JSON(http.StatusOK, loan)
 }
 
-// PUT /loans/:id/return
+// ReturnLoan godoc
+// @Summary Marca um empréstimo como devolvido
+// @Tags loans
+// @Accept json
+// @Produce json
+// @Param id path int true "Loan ID"
+// @Success 200 {object} models.Loan
+// @Failure 404 {object} map[string]string
+// @Router /loans/{id}/return [put]
 func ReturnLoan(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var loan models.Loan
@@ -90,7 +118,13 @@ func ReturnLoan(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"message": "Book returned successfully", "loan": loan})
 }
 
-// DELETE /loans/:id
+// DeleteLoan godoc
+// @Summary Remove um empréstimo
+// @Tags loans
+// @Param id path int true "Loan ID"
+// @Success 204 {string} string "No Content"
+// @Failure 404 {object} map[string]string
+// @Router /loans/{id} [delete]
 func DeleteLoan(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var loan models.Loan

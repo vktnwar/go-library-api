@@ -9,14 +9,27 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GET /authors
+// GetAuthors godoc
+// @Summary Lista todos os autores
+// @Tags authors
+// @Produce json
+// @Success 200 {array} models.Author
+// @Router /authors [get]
 func GetAuthors(c *gin.Context) {
 	var authors []models.Author
 	database.DB.Preload("Books").Find(&authors) // já traz livros
 	c.JSON(http.StatusOK, authors)
 }
 
-// POST /authors
+// CreateAuthor godoc
+// @Summary Cria um novo autor
+// @Tags authors
+// @Accept json
+// @Produce json
+// @Param author body models.Author true "Dados do autor"
+// @Success 201 {object} models.Author
+// @Failure 400 {object} map[string]string
+// @Router /authors [post]
 func CreateAuthor(c *gin.Context) {
 	var author models.Author
 
@@ -29,7 +42,14 @@ func CreateAuthor(c *gin.Context) {
 	c.JSON(http.StatusCreated, author)
 }
 
-// GET /authors/:id
+// GetAuthor godoc
+// @Summary Busca um autor pelo ID
+// @Tags authors
+// @Produce json
+// @Param id path int true "Author ID"
+// @Success 200 {object} models.Author
+// @Failure 404 {object} map[string]string
+// @Router /authors/{id} [get]
 func GetAuthor(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var author models.Author
@@ -42,7 +62,17 @@ func GetAuthor(c *gin.Context) {
 	c.JSON(http.StatusOK, author)
 }
 
-// PUT /authors/:id
+// UpdateAuthor godoc
+// @Summary Atualiza um autor
+// @Tags authors
+// @Accept json
+// @Produce json
+// @Param id path int true "Author ID"
+// @Param author body models.Author true "Dados atualizados"
+// @Success 200 {object} models.Author
+// @Failure 400 {object} map[string]string
+// @Failure 404 {object} map[string]string
+// @Router /authors/{id} [put]
 func UpdateAuthor(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var author models.Author
@@ -66,7 +96,13 @@ func UpdateAuthor(c *gin.Context) {
 	c.JSON(http.StatusOK, author)
 }
 
-// DELETE /authors/:id
+// DeleteAuthor godoc
+// @Summary Remove um autor
+// @Tags authors
+// @Param id path int true "Author ID"
+// @Success 204 {string} string "No Content"
+// @Failure 404 {object} map[string]string
+// @Router /authors/{id} [delete]
 func DeleteAuthor(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	var author models.Author
